@@ -1,0 +1,421 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://b6hdnbsfbbt1w"
+path="res://.godot/imported/font3d.glb-bf9f34046d9d9cd33b5d724697f01847.scn"
+
+[deps]
+
+source_file="res://addons/meshtext/examples/base_font/font3d.glb"
+dest_files=["res://.godot/imported/font3d.glb-bf9f34046d9d9cd33b5d724697f01847.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"Material": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://addons/meshtext/examples/base_font/mat_text3d_example.tres",
+"use_external/path": "uid://57mniklw568w"
+}
+},
+"meshes": {
+"font3d_0": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_0.res",
+"save_to_file/path": "uid://7yy0aramgj24"
+},
+"font3d_1": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_1.res",
+"save_to_file/path": "uid://b152s4csds61s"
+},
+"font3d_2": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_2.res",
+"save_to_file/path": "uid://cj8cvmii3ukee"
+},
+"font3d_3": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_3.res",
+"save_to_file/path": "uid://y3nweslwb7o3"
+},
+"font3d_4": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_4.res",
+"save_to_file/path": "uid://digqj6hds60sa"
+},
+"font3d_5": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_5.res",
+"save_to_file/path": "uid://jiijottaqjj8"
+},
+"font3d_6": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_6.res",
+"save_to_file/path": "uid://bt326co38us73"
+},
+"font3d_7": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_7.res",
+"save_to_file/path": "uid://cl7gnulqmlhpo"
+},
+"font3d_8": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_8.res",
+"save_to_file/path": "uid://cv5qnmij0c6bc"
+},
+"font3d_9": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_9.res",
+"save_to_file/path": "uid://lnvvhupx2gvd"
+},
+"font3d_a": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_a.res",
+"save_to_file/path": "uid://d1s6t6k6ch30s"
+},
+"font3d_apostraphe": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_apostraphe.res",
+"save_to_file/path": "uid://cv7w77mkxouml"
+},
+"font3d_b": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_b.res",
+"save_to_file/path": "uid://dfxlk3b8ah120"
+},
+"font3d_c": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_c.res",
+"save_to_file/path": "uid://cl0wjnpdtxfp8"
+},
+"font3d_colon": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_colon.res",
+"save_to_file/path": "uid://do83vfp5lameh"
+},
+"font3d_d": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_d.res",
+"save_to_file/path": "uid://brbe1xl0fervc"
+},
+"font3d_dash": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_dash.res",
+"save_to_file/path": "uid://ctle545gyrifq"
+},
+"font3d_e": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_e.res",
+"save_to_file/path": "uid://bgxyw5o31k8wj"
+},
+"font3d_f": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_f.res",
+"save_to_file/path": "uid://yqxlmcjirqau"
+},
+"font3d_g": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_g.res",
+"save_to_file/path": "uid://b001hedglxl4c"
+},
+"font3d_h": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_h.res",
+"save_to_file/path": "uid://b2jvf4sckehek"
+},
+"font3d_i": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_i.res",
+"save_to_file/path": "uid://imedt841x4h6"
+},
+"font3d_j": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_j.res",
+"save_to_file/path": "uid://dlshpn10uwgeq"
+},
+"font3d_k": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_k.res",
+"save_to_file/path": "uid://p4kxqtsqdtrs"
+},
+"font3d_l": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_l.res",
+"save_to_file/path": "uid://yahugik4e1yi"
+},
+"font3d_m": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_m.res",
+"save_to_file/path": "uid://ro0if8eqk04q"
+},
+"font3d_n": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_n.res",
+"save_to_file/path": "uid://bktsnixs6heod"
+},
+"font3d_o": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_o.res",
+"save_to_file/path": "uid://b3jkey0akin35"
+},
+"font3d_p": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_p.res",
+"save_to_file/path": "uid://b60qlijeareso"
+},
+"font3d_period": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_period.res",
+"save_to_file/path": "uid://cnqgh6nxg6l2h"
+},
+"font3d_q": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_q.res",
+"save_to_file/path": "uid://d0fvtkwl2vc26"
+},
+"font3d_question": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_question.res",
+"save_to_file/path": "uid://bksxdrlj2786y"
+},
+"font3d_r": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_r.res",
+"save_to_file/path": "uid://vuwllnowm35c"
+},
+"font3d_s": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_s.res",
+"save_to_file/path": "uid://t5rs36es78tp"
+},
+"font3d_t": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_t.res",
+"save_to_file/path": "uid://bcomode7w1ol4"
+},
+"font3d_u": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_u.res",
+"save_to_file/path": "uid://cssp8jp28djij"
+},
+"font3d_v": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_v.res",
+"save_to_file/path": "uid://bmqwvinhcmxfl"
+},
+"font3d_w": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_w.res",
+"save_to_file/path": "uid://cderg5vmj0s58"
+},
+"font3d_x": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_x.res",
+"save_to_file/path": "uid://bslou6cjo2apx"
+},
+"font3d_y": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_y.res",
+"save_to_file/path": "uid://dk8m2txfcure8"
+},
+"font3d_z": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://addons/meshtext/examples/base_font/meshes/font3d_z.res",
+"save_to_file/path": "uid://cn5jiyesllhgu"
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1
