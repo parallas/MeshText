@@ -358,8 +358,9 @@ public partial class MeshText : Node3D, ISerializationListener
         scale.Y = HorizontalOffsets.Length * LineSpacing - lineSpacingPad * 2f;
         Transform3D finalTransform = Transform3D.Identity
                 .Scaled(Vector3.One * FontSize)
-                .Translated(translation)
                 .Scaled(scale)
+                .Translated(Vector3.Right * translation.X * FontSize)
+                .Translated(Vector3.Up * translation.Y * FontSize)
             ;
 
         return

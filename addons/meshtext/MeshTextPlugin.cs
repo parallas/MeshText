@@ -12,6 +12,7 @@ public partial class MeshTextPlugin : EditorPlugin
     public override void _EnterTree()
     {
         base._EnterTree();
+        _gizmoPlugin.UndoRedo = GetUndoRedo();
         AddNode3DGizmoPlugin(_gizmoPlugin);
     }
 
