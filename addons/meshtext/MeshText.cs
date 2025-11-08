@@ -230,19 +230,22 @@ public partial class MeshText : Node3D, ISerializationListener
             Rid scenario = world3d.Scenario;
             RenderingServer.InstanceSetScenario(instance, scenario);
             Mesh mesh = null;
+            Material material = null;
             if (Font.TryGetMeshForCharacter(c, out Mesh characterMesh))
             {
                 mesh = characterMesh;
+                material = _materialOverride;
             }
             if (_substringPositions.TryGetValue(i, out var substring) && Font.TryGetMeshForSubstring(substring, out Mesh substringMesh))
             {
                 mesh = substringMesh;
+                material = mesh.SurfaceGetMaterial(0);
             }
             if (mesh is not null)
             {
                 RenderingServer.InstanceSetBase(instance, mesh.GetRid());
-                if (_materialOverride is not null && IsInstanceValid(_materialOverride))
-                    RenderingServer.InstanceSetSurfaceOverrideMaterial(instance, 0, _materialOverride.GetRid());
+                if (material is not null && IsInstanceValid(material))
+                    RenderingServer.InstanceSetSurfaceOverrideMaterial(instance, 0, material.GetRid());
             }
 
             // create the necessary transform dictionary entries and set them on the rendering server
