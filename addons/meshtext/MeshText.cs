@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Godot.Collections;
+using Environment = System.Environment;
 using Range = System.Range;
 
 namespace Parallas.MeshText;
@@ -70,12 +72,15 @@ public partial class MeshText : Node3D, ISerializationListener
     [Export(PropertyHint.GroupEnable)] public bool UseMaxCharacterWidth = false;
     [Export(PropertyHint.Range, "1, 2147483647")] public int MaxCharacterWidth = 16;
     private int EvaluatedMaxCharacterWidth => UseMaxCharacterWidth ? MaxCharacterWidth : Text.Length;
-    [Export] public bool WordWrap = true;
+    [Export] public WrapModes WrapMode = WrapModes.Word;
 
     [ExportGroup("Effects")]
     [Export] public Array<MeshTextEffect> TextEffects = new();
 
+    private string _textClean;
     private List<Rid> _instances = new();
+    private HashSet<int> _lineBreakPositions = [];
+    private System.Collections.Generic.Dictionary<int, string> _substringPositions = [];
     public System.Collections.Generic.Dictionary<int, Rid> CharacterIndexInstances { get; private set; } = new();
     public System.Collections.Generic.Dictionary<Rid, Vector2I> CharacterPositions { get; private set; } = new();
     public System.Collections.Generic.Dictionary<Rid, Transform3D> Transforms { get; private set; } = new();
@@ -97,7 +102,8 @@ public partial class MeshText : Node3D, ISerializationListener
         _ => 0f
     };
 
-    private RegEx _wordSplitRegex = new RegEx();
+    private RegEx _wordsRegex = new RegEx();
+    private RegEx _wordsAndWhitespaceRegex = new RegEx();
     private float _time = 0f;
 
     public enum AlignmentHorizontal
@@ -114,10 +120,19 @@ public partial class MeshText : Node3D, ISerializationListener
         Bottom
     }
 
+    public enum WrapModes
+    {
+        None,
+        Character,
+        Word,
+    }
+
     public override void _Ready()
     {
         base._Ready();
-        _wordSplitRegex.Compile(@"(\s+)|(\S+)");
+        _wordsRegex.Compile(@"(\S+)");
+        _wordsAndWhitespaceRegex.Compile(@"(\s+)|(\S+)");
+        // _wordsAndWhitespaceRegex.Compile(@"(\s+)|(\\.)|(\W)|(\w+)");
     }
 
     public override void _EnterTree()
@@ -157,27 +172,84 @@ public partial class MeshText : Node3D, ISerializationListener
         if (!IsInstanceValid(this)) return;
         if (GetWorld3D() is not { } world3d) return;
 
-        for (int i = 0; i < Text.Length; i++)
+        var textOriginal = new StringBuilder(Text)
+            .Replace("\r\n", Environment.NewLine)
+            .Replace("\n", Environment.NewLine);
+        var textClean = new StringBuilder(textOriginal.ToString());
+
+        // Get all original linebreaks
+        var matchNewLine = Regex.Escape(Environment.NewLine);
+        var originalLineBreakIndices = Regex.Matches(textOriginal.ToString(), matchNewLine).Select(match => match.Index).ToHashSet();
+        textClean.Replace(Environment.NewLine, string.Empty);
+
+        // Get all original substrings
+        System.Collections.Generic.Dictionary<int, string> substringLookup = [];
+        foreach (var substring in _font.SubstringMeshes.Keys)
         {
-            char c = Text[i];
-            if (Font.TryGetMeshForCharacter(c, out Mesh mesh))
+            var matchSubstring = Regex.Escape(substring);
+            var originalCustomStringIndices = Regex.Matches(textOriginal.ToString(), matchSubstring).Select(match => match.Index).ToArray();
+            foreach (var originalCustomStringIndex in originalCustomStringIndices)
             {
-                // Create a visual instance (for 3D).
-                var instance = RenderingServer.InstanceCreate();
-                // Set the scenario from the world, this ensures it
-                // appears with the same objects as the scene.
-                Rid scenario = world3d.Scenario;
-                RenderingServer.InstanceSetScenario(instance, scenario);
+                substringLookup.Add(originalCustomStringIndex, substring);
+            }
+            textClean.Replace(substring, " ");
+        }
+
+        // Calculate all the final offset trimmed positions
+        int counter = 0;
+        for (var i = 0; i < textOriginal.Length; i++)
+        {
+            if (originalLineBreakIndices.Contains(i))
+            {
+                _lineBreakPositions.Add(counter);
+                // counter += Environment.NewLine.Length;
+                i += Environment.NewLine.Length - 1;
+            }
+            else if (substringLookup.TryGetValue(i, out var substring))
+            {
+                _substringPositions.Add(counter, substring);
+                counter++;
+                i += substring.Length - 1;
+            }
+            else
+            {
+                counter++;
+            }
+        }
+
+        _textClean = textClean.ToString();
+
+        for (int i = 0; i < _textClean.Length; i++)
+        {
+            char c = _textClean[i];
+
+            // Create a visual instance (for 3D).
+            var instance = RenderingServer.InstanceCreate();
+            // Set the scenario from the world, this ensures it
+            // appears with the same objects as the scene.
+            Rid scenario = world3d.Scenario;
+            RenderingServer.InstanceSetScenario(instance, scenario);
+            Mesh mesh = null;
+            if (Font.TryGetMeshForCharacter(c, out Mesh characterMesh))
+            {
+                mesh = characterMesh;
+            }
+            if (_substringPositions.TryGetValue(i, out var substring) && Font.TryGetMeshForSubstring(substring, out Mesh substringMesh))
+            {
+                mesh = substringMesh;
+            }
+            if (mesh is not null)
+            {
                 RenderingServer.InstanceSetBase(instance, mesh.GetRid());
                 if (_materialOverride is not null && IsInstanceValid(_materialOverride))
                     RenderingServer.InstanceSetSurfaceOverrideMaterial(instance, 0, _materialOverride.GetRid());
-
-                // create the necessary transform dictionary entries and set them on the rendering server
-                CreateTransform(instance);
-
-                _instances.Add(instance);
-                CharacterIndexInstances.Add(i, instance);
             }
+
+            // create the necessary transform dictionary entries and set them on the rendering server
+            CreateTransform(instance);
+
+            _instances.Add(instance);
+            CharacterIndexInstances.Add(i, instance);
         }
     }
 
@@ -189,6 +261,8 @@ public partial class MeshText : Node3D, ISerializationListener
         }
 
         _instances.Clear();
+        _lineBreakPositions.Clear();
+        _substringPositions.Clear();
         HorizontalOffsets = [];
         CharacterIndexInstances.Clear();
         CharacterPositions.Clear();
@@ -244,19 +318,42 @@ public partial class MeshText : Node3D, ISerializationListener
             RelativeTransforms[instance] = relativeTransform;
         }
 
-        String[] words;
-        if (WordWrap)
-            words = [.._wordSplitRegex.SearchAll(Text).SelectMany<RegExMatch, String>(match => [match.Strings[1], match.Strings[2]])];
-        else
-            words = [..Text.ToCharArray().Select(c => c.ToString())];
+        String[] allWords = [.._wordsRegex.SearchAll(_textClean).Select(match => match.Strings[0])];
+        String[] wordsAndWhitespace =
+        [
+            .._wordsAndWhitespaceRegex.SearchAll(_textClean)
+                .SelectMany<RegExMatch, String>(match => [match.Strings[1], match.Strings[2]])
+        ];
+        char[] allCharacters = _textClean.ToCharArray().ToArray();
+
         List<String> lines = [];
         StringBuilder currentLine = new StringBuilder();
+        int textCleanLength = _textClean.Length;
+
         var currentWidth = 0;
-        foreach (var word in words)
+        for (var index = 0; index < textCleanLength; index++)
         {
-            var wordWidth = word.Length;
-            var wordWidthTrimmed = word.TrimEnd().Length;
-            if (currentWidth + wordWidthTrimmed > EvaluatedMaxCharacterWidth)
+            var prevCharacter = index > 0 ? _textClean[index - 1] : ' ';
+            var character = allCharacters[index];
+            var isWhitespace = IsWhitespace(character, index);
+            var prevIsWhitespace = IsWhitespace(prevCharacter, index - 1);
+            var stringToAdd = character.ToString();
+            var checkWidth = isWhitespace ? 0 : 1;
+            if (WrapMode == WrapModes.Word && !isWhitespace && prevIsWhitespace)
+            {
+                var wordLength = 1;
+                for (int i = index + 1; i < textCleanLength; i++)
+                {
+                    if (IsWhitespace(_textClean[i], i, textCleanLength))
+                        break;
+
+                    wordLength++;
+                }
+                checkWidth = wordLength;
+                stringToAdd = _textClean.Substring(index, wordLength);
+                index += wordLength - 1;
+            }
+            if (WrapMode != WrapModes.None && currentWidth + checkWidth > EvaluatedMaxCharacterWidth || _lineBreakPositions.Contains(index))
             {
                 if (currentWidth > 0)
                 {
@@ -266,18 +363,21 @@ public partial class MeshText : Node3D, ISerializationListener
                 }
                 else
                 {
-                    lines.Add(word);
+                    lines.Add(stringToAdd);
                     continue;
                 }
             }
 
-            currentLine.Append(word);
-            currentWidth += wordWidth;
+            currentLine.Append(stringToAdd);
+            currentWidth += stringToAdd.Length;
         }
+
         if (currentWidth > 0)
         {
             lines.Add(currentLine.ToString());
         }
+
+
         HorizontalOffsets = new float[lines.Count];
 
         int charCounter = 0;
@@ -285,7 +385,7 @@ public partial class MeshText : Node3D, ISerializationListener
         for (int i = 0; i < lines.Count; i++)
         {
             var line = lines[i];
-            var lineTrimWidth = line.Trim().Length;
+            var lineTrimWidth = line.Length;
             var offset = EvaluatedMaxCharacterWidth - lineTrimWidth;
 
             float positionOffsetX = HorizontalJustification switch
@@ -296,17 +396,13 @@ public partial class MeshText : Node3D, ISerializationListener
                 _ => 0f
             };
             HorizontalOffsets[i] = positionOffsetX + AlignmentOffsetX;
-
             for (int charIndex = 0; charIndex < line.Length; charIndex++)
             {
-                bool hasCharacter = CharacterIndexInstances.TryGetValue(charCounter, out Rid instance);
-                if (hasCharacter)
-                {
-                    CharacterPositions[instance] = characterPos;
-                    UpdateInstanceTransform(instance);
-                    RenderingServer.InstanceSetVisible(instance, Visible);
-                    RenderingServer.InstanceGeometrySetShaderParameter(instance, "tint", Tint);
-                }
+                if (!CharacterIndexInstances.TryGetValue(charCounter, out Rid instance)) continue;
+                CharacterPositions[instance] = characterPos;
+                UpdateInstanceTransform(instance);
+                RenderingServer.InstanceSetVisible(instance, Visible);
+                RenderingServer.InstanceGeometrySetShaderParameter(instance, "tint", Tint);
 
                 characterPos.X++;
                 charCounter++;
@@ -319,6 +415,14 @@ public partial class MeshText : Node3D, ISerializationListener
         #if TOOLS
         UpdateGizmos();
         #endif
+    }
+
+    private bool IsWhitespace(char character, int index, int stringLength = int.MaxValue, bool isOobWhiteSpace = true)
+    {
+        if (index < 0 || index >= stringLength) return isOobWhiteSpace;
+        if (_lineBreakPositions.Contains(index)) return true;
+        if (char.IsWhiteSpace(character) && !_substringPositions.ContainsKey(index)) return true;
+        return false;
     }
 
     #if TOOLS

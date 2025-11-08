@@ -20,4 +20,6 @@ public partial class MeshTextFont : Resource
         mesh = CharacterMeshes[index];
         return true;
     }
+
+    public bool TryGetMeshForSubstring(String substring, out Mesh mesh) => SubstringMeshes.TryGetValue(substring, out mesh);
 }

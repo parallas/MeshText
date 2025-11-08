@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MeshTextFont" load_steps=43 format=3 uid="uid://dydsue4wk6xys"]
+[gd_resource type="Resource" script_class="MeshTextFont" load_steps=45 format=3 uid="uid://dydsue4wk6xys"]
 
 [ext_resource type="ArrayMesh" uid="uid://cnqgh6nxg6l2h" path="res://addons/meshtext/examples/base_font/meshes/font3d_period.res" id="1_p04h2"]
 [ext_resource type="ArrayMesh" uid="uid://cv7w77mkxouml" path="res://addons/meshtext/examples/base_font/meshes/font3d_apostraphe.res" id="2_vaiqw"]
@@ -43,9 +43,21 @@
 [ext_resource type="ArrayMesh" uid="uid://cn5jiyesllhgu" path="res://addons/meshtext/examples/base_font/meshes/font3d_z.res" id="41_3eu3t"]
 [ext_resource type="Script" uid="uid://n1b38tk8dayl" path="res://addons/meshtext/MeshTextFont.cs" id="42_kasew"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_x54b6"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="TorusMesh" id="TorusMesh_4yo5q"]
+outer_radius = 0.25
+rings = 8
+ring_segments = 8
+
 [resource]
 script = ExtResource("42_kasew")
 CharacterSet = ".'-0123456789:?abcdefghijklmnopqrstuvwxyz"
 CharacterMeshes = Array[Mesh]([ExtResource("1_p04h2"), ExtResource("2_vaiqw"), ExtResource("3_p6llc"), ExtResource("4_qsx0r"), ExtResource("5_8crb8"), ExtResource("6_acjvi"), ExtResource("7_t637s"), ExtResource("8_oylb6"), ExtResource("9_fuel7"), ExtResource("10_dksdc"), ExtResource("11_phski"), ExtResource("12_cqp62"), ExtResource("13_1tu07"), ExtResource("14_tah5l"), ExtResource("15_wu4tr"), ExtResource("16_7prwv"), ExtResource("17_kvufk"), ExtResource("18_ggc1w"), ExtResource("19_yxxpn"), ExtResource("20_k5lil"), ExtResource("21_5wh7w"), ExtResource("22_2wemp"), ExtResource("23_0cs5x"), ExtResource("24_2khic"), ExtResource("25_trigt"), ExtResource("26_bgf03"), ExtResource("27_hhqns"), ExtResource("28_6n6e3"), ExtResource("29_xxln7"), ExtResource("30_d5km0"), ExtResource("31_rn65n"), ExtResource("32_1t5nq"), ExtResource("33_cnb62"), ExtResource("34_jt7my"), ExtResource("35_lhyqb"), ExtResource("36_vskvh"), ExtResource("37_he2p5"), ExtResource("38_x1pbi"), ExtResource("39_umqi5"), ExtResource("40_kjb5s"), ExtResource("41_3eu3t")])
+SubstringMeshes = Dictionary[String, Mesh]({
+"<cube>": SubResource("BoxMesh_x54b6"),
+"<ring>": SubResource("TorusMesh_4yo5q")
+})
 CaseSensitive = false
 metadata/_custom_type_script = "uid://n1b38tk8dayl"
